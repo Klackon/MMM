@@ -10,7 +10,7 @@ public class PlayerTest : MonoBehaviour {
 		player1.selectWizard ("Wizard1");
 		player1.selectBanner (1);
 		player1.selectSpecialAbility ("Invinsible");
-		player1.intializeSpellRank ();
+
 		player1.setSpellRank (10);
 		player1.selectCityName ("Atlanta");
 		Debug.Log(player1.getRace());
