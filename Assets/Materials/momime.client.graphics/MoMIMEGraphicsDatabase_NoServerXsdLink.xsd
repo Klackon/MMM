@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:nxe="http://www.roughseas.ca/xmleditor/1.0.0"
+	xmlns:momimenewgame="http://momime/common/database/newgame/v0_9_5" xmlns:momimecommon="http://momime/common/database/v0_9_5"
+	xmlns:mps="http://www.ndg.com/multiplayer/sessionbase" xmlns:map="http://www.ndg.com/map" 
+	xmlns:momimegfx="http://momime/client/graphics/database/v0_9_5" targetNamespace="http://momime/client/graphics/database/v0_9_5"
+	jaxb:version="2.0">
+	
+	<xsd:import namespace="http://www.ndg.com/map"/>
+	<xsd:import namespace="http://www.ndg.com/multiplayer/sessionbase"/>
+	<xsd:import namespace="http://momime/common/database/newgame/v0_9_5"/>
+	<xsd:import namespace="http://momime/common/database/v0_9_5"/>
+
+    <xsd:annotation>
+    	<xsd:documentation>
+    		This is to get around an issue with the client XSDs needing a reference to the server XSD.  Its necessary so that within the client XSDs we can automatically
+    		verify via the schema that, e.g., a raceID declared in the English XML does indeed correspond to a valid race from the Server XML.  The editor also needs
+    		to be aware of the server XSD to make these links work, i.e. so when adding a race to the English XML the drop down list in the editor correctly shows all the
+    		races from the Server XML.  So the link to the server XSD is necessary to avoid masses of hand coding to supplement the validation performed naturally by the
+    		XSDs and to the editor - but we desperately don't want the Server XSD POJOs visible to the client module.  So as a workaround, the client XSDs are copied
+    		into secondary versions which are identical except that all the references to the Server XSD have been stripped out - that's the version we then run xsd2java on.
+    	</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="graphicsDatabase">
+	<xsd:complexType>
+		<xsd:sequence>
+			<!-- Graphics DB entities -->
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="wizard" type="momimegfx:wizard" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="productionType" type="momimegfx:productionType" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="race" type="momimegfx:race">
+				<xsd:key name="racePopulationTaskPK">
+					<xsd:selector xpath="racePopulationTask" />
+					<xsd:field xpath="@populationTaskID" />
+				</xsd:key>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="pick" type="momimegfx:pick" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="unitAttribute" type="momimegfx:unitAttribute">
+				<xsd:key name="unitAttributeWeaponGradePK">
+					<xsd:selector xpath="unitAttributeWeaponGrade" />
+					<xsd:field xpath="@weaponGradeNumber" />
+				</xsd:key>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="rangedAttackType" type="momimegfx:rangedAttackType">
+				<xsd:key name="rangedAttackTypeWeaponGradePK">
+					<xsd:selector xpath="rangedAttackTypeWeaponGrade" />
+					<xsd:field xpath="@weaponGradeNumber" />
+				</xsd:key>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="spell" type="momimegfx:spell" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="combatAction" type="momimegfx:combatAction" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="unit" type="momimegfx:unit" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="tileSet" type="momimegfx:tileSet">
+				<xsd:key name="smoothingSystemPK">
+					<xsd:selector xpath="smoothingSystem" />
+					<xsd:field xpath="@smoothingSystemID" />
+				</xsd:key>
+			</xsd:element>			
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="unitType" type="momimegfx:unitType">
+				<xsd:key name="experienceLevelPK">
+					<xsd:selector xpath="experienceLevel" />
+					<xsd:field xpath="@levelNumber" />
+				</xsd:key>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="unitSkill" type="momimegfx:unitSkill" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="weaponGrade" type="momimegfx:weaponGrade" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="combatTileUnitRelativeScale" type="momimegfx:combatTileUnitRelativeScale" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="combatAreaEffect" type="momimegfx:combatAreaEffect" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="tileType" type="momimegfx:tileType" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="mapFeature" type="momimegfx:mapFeature" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="cityImage" type="momimegfx:cityImage" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="combatTileBorderImage" type="momimegfx:combatTileBorderImage" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="cityViewElementSet" type="momimegfx:cityViewElementSet" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="cityViewElement" type="momimegfx:cityViewElement" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="animation" type="momimegfx:animation" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="playList" type="momimegfx:playList" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+<!-- Primary keys -->
+
+		<xsd:key name="wizardPK">
+			<xsd:selector xpath="wizard" />
+			<xsd:field xpath="@wizardID" />
+		</xsd:key>
+		<xsd:key name="productionTypePK">
+			<xsd:selector xpath="productionType" />
+			<xsd:field xpath="@productionTypeID" />
+		</xsd:key>
+		<xsd:key name="racePK">
+			<xsd:selector xpath="race" />
+			<xsd:field xpath="@raceID" />
+		</xsd:key>
+		<xsd:key name="pickPK">
+			<xsd:selector xpath="pick" />
+			<xsd:field xpath="@pickID" />
+		</xsd:key>
+		<xsd:key name="unitAttributePK">
+			<xsd:selector xpath="unitAttribute" />
+			<xsd:field xpath="@unitAttributeID" />
+		</xsd:key>
+		<xsd:key name="rangedAttackTypePK">
+			<xsd:selector xpath="rangedAttackType" />
+			<xsd:field xpath="@rangedAttackTypeID" />
+		</xsd:key>
+		<xsd:key name="spellPK">
+			<xsd:selector xpath="spell" />
+			<xsd:field xpath="@spellID" />
+		</xsd:key>
+		<xsd:key name="combatActionPK">
+			<xsd:selector xpath="combatAction" />
+			<xsd:field xpath="@combatActionID" />
+		</xsd:key>
+		<xsd:key name="unitPK">
+			<xsd:selector xpath="unit" />
+			<xsd:field xpath="@unitID" />
+		</xsd:key>
+		<xsd:key name="tileSetPK">
+			<xsd:selector xpath="tileSet" />
+			<xsd:field xpath="@tileSetID" />
+		</xsd:key>
+		<xsd:key name="unitTypePK">
+			<xsd:selector xpath="unitType" />
+			<xsd:field xpath="@unitTypeID" />
+		</xsd:key>
+		<xsd:key name="unitSkillPK">
+			<xsd:selector xpath="unitSkill" />
+			<xsd:field xpath="@unitSkillID" />
+		</xsd:key>
+		<xsd:key name="weaponGradePK">
+			<xsd:selector xpath="weaponGrade" />
+			<xsd:field xpath="@weaponGradeNumber" />
+		</xsd:key>
+		<xsd:key name="combatTileUnitRelativeScalePK">
+			<xsd:selector xpath="combatTileUnitRelativeScale" />
+			<xsd:field xpath="@scale" />
+		</xsd:key>
+		<xsd:key name="animationPK">
+			<xsd:selector xpath="animation" />
+			<xsd:field xpath="@animationID" />
+		</xsd:key>
+		<xsd:key name="cityViewElementSetPK">
+			<xsd:selector xpath="cityViewElementSet" />
+			<xsd:field xpath="@cityViewElementSetID" />
+		</xsd:key>
+		<xsd:key name="combatAreaEffectPK">
+			<xsd:selector xpath="combatAreaEffect" />
+			<xsd:field xpath="@combatAreaEffectID" />
+		</xsd:key>
+		<xsd:key name="tileTypePK">
+			<xsd:selector xpath="tileType" />
+			<xsd:field xpath="@tileTypeID" />
+		</xsd:key>
+		<xsd:key name="mapFeaturePK">
+			<xsd:selector xpath="mapFeature" />
+			<xsd:field xpath="@mapFeatureID" />
+		</xsd:key>
+		<xsd:key name="playListPK">
+			<xsd:selector xpath="playList" />
+			<xsd:field xpath="@playListID" />
+		</xsd:key>
+		
+<!-- Foreign keys -->
+
+		<xsd:keyref refer="momimegfx:playListPK" name="wizardCombatPlayListFKplayList">
+			<xsd:selector xpath="wizard/combatPlayList" />
+			<xsd:field xpath="@playListID" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:animationPK" name="rangedAttackTypeCombatImageFKanimation">
+			<xsd:selector xpath="rangedAttackType/rangedAttackTypeCombatImage" />
+			<xsd:field xpath="rangedAttackTypeCombatAnimation" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:animationPK" name="spellFKanimation">
+			<xsd:selector xpath="spell" />
+			<xsd:field xpath="combatCastAnimation" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:unitPK" name="secondaryUnitFKunit">
+			<xsd:selector xpath="unit" />
+			<xsd:field xpath="secondaryUnitID" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:combatActionPK" name="unitCombatActionFKcombatAction">
+			<xsd:selector xpath="unit/unitCombatAction" />
+			<xsd:field xpath="@combatActionID" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:animationPK" name="unitCombatImageFKanimation">
+			<xsd:selector xpath="unit/unitCombatAction/unitCombatImage" />
+			<xsd:field xpath="unitCombatAnimation" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:animationPK" name="smoothedTileFKanimation">
+			<xsd:selector xpath="tileSet/smoothedTileType/smoothedTile" />
+			<xsd:field xpath="tileAnimation" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:combatActionPK" name="unitSkillFKcombatActionStand">
+			<xsd:selector xpath="unitSkill" />
+			<xsd:field xpath="standActionID" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:combatActionPK" name="unitSkillFKcombatActionMove">
+			<xsd:selector xpath="unitSkill" />
+			<xsd:field xpath="moveActionID" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:cityViewElementSetPK" name="cityViewElementFKcityViewElementSet">
+			<xsd:selector xpath="cityViewElement" />
+			<xsd:field xpath="cityViewElementSetID" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:animationPK" name="cityViewElementFKanimation">
+			<xsd:selector xpath="cityViewElement" />
+			<xsd:field xpath="cityViewAnimation" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:animationPK" name="combatTileBorderImageFKanimationStandard">
+			<xsd:selector xpath="combatTileBorderImage" />
+			<xsd:field xpath="standardAnimation" />
+		</xsd:keyref>
+		<xsd:keyref refer="momimegfx:animationPK" name="combatTileBorderImageFKanimationRaising">
+			<xsd:selector xpath="combatTileBorderImage" />
+			<xsd:field xpath="raisingAnimation" />
+		</xsd:keyref>
+	</xsd:element>
+		
+<!-- Complex types -->
+	
+	<xsd:complexType name="wizard" nxe:singular="Wizard" nxe:plural="Wizards">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="flagColour" type="momimecommon:colour" nxe:label="Flag colour" nxe:gridwidth="80" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="portraitFile" type="momimegfx:imageFilename" nxe:label="Portrait image file" nxe:gridwidth="250" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="combatPlayList" type="momimegfx:wizardCombatPlayList" nxe:label="Combat play list" nxe:gridwidth="250" />
+		</xsd:sequence>
+		<xsd:attribute name="wizardID" type="momimecommon:wizardID" use="required" nxe:label="Wizard ID" nxe:gridwidth="80" />
+	</xsd:complexType>
+
+	<xsd:complexType name="wizardCombatPlayList" nxe:singular="Wizard combat play list" nxe:plural="Wizard combat play lists">
+		<xsd:attribute name="playListID" type="momimegfx:playListID" use="required" nxe:label="Wizard combat play list ID" nxe:gridwidth="300" />
+	</xsd:complexType>
+
+	<xsd:complexType name="productionType" nxe:singular="Production Type" nxe:plural="Production Types" nxe:submenu="Cities and Races">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="productionTypeImage" type="momimegfx:productionTypeImage" />
+		</xsd:sequence>
+		<xsd:attribute name="productionTypeID" type="momimecommon:productionTypeID" use="required" nxe:label="Production Type ID" nxe:gridwidth="100">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>productionTypeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="productionTypeImage" nxe:singular="Production Type Image" nxe:plural="Production Type Images">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="productionImageFile" type="momimegfx:imageFilename" nxe:label="Production type image file" nxe:gridwidth="270" />
+		</xsd:sequence>
+		<xsd:attribute name="productionValue" type="momimegfx:productionImageValue" use="required" nxe:label="Production Type Value" nxe:gridwidth="150" />
+	</xsd:complexType>
+
+	<xsd:complexType name="race" nxe:singular="Race" nxe:plural="Races" nxe:submenu="Cities and Races">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="racePopulationTask" type="momimegfx:racePopulationTask" />
+		</xsd:sequence>
+		<xsd:attribute name="raceID" type="momimecommon:raceID" use="required" nxe:label="Race ID" nxe:gridwidth="70">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>raceName</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="racePopulationTask" nxe:singular="Race Population Task" nxe:plural="Race Population Tasks">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="civilianImageFile" type="momimegfx:imageFilename" nxe:label="Civilian image file" nxe:gridwidth="290" />
+		</xsd:sequence>
+		<xsd:attribute name="populationTaskID" type="momimecommon:populationTaskID" use="required" nxe:label="Population Task ID" nxe:gridwidth="150" />
+	</xsd:complexType>
+
+	<xsd:complexType name="pick" nxe:singular="Pick" nxe:plural="Picks" nxe:submenu="Magic">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="pickBookshelfTitleColour" type="momimecommon:colour" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="bookImage" type="momimegfx:bookImage" />
+		</xsd:sequence>
+		<xsd:attribute name="pickID" type="momimecommon:pickID" use="required" nxe:label="Pick Type ID" nxe:gridwidth="100">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>pickDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="bookImage" nxe:singular="Book Image" nxe:plural="Book Images">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="bookImageFile" type="momimegfx:imageFilename" nxe:label="Book image file" nxe:gridwidth="250" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="unitAttribute" nxe:singular="Unit Attribute" nxe:plural="Unit Attributes" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="unitAttributeWeaponGrade" type="momimegfx:unitAttributeWeaponGrade" />
+		</xsd:sequence>
+		<xsd:attribute name="unitAttributeID" type="momimecommon:unitAttributeID" use="required" nxe:label="Unit Attribute ID" nxe:gridwidth="100" />
+	</xsd:complexType>
+
+	<xsd:complexType name="unitAttributeWeaponGrade" nxe:singular="Attr Weapon Grade" nxe:plural="Attr Weapon Grades">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="attributeImageFile" type="momimegfx:imageFilename" nxe:label="Unit Attribute image file" nxe:gridwidth="290" />
+		</xsd:sequence>
+		<xsd:attribute name="weaponGradeNumber" type="momimecommon:weaponGradeNumber" use="required" nxe:label="Weapon Grade Number" nxe:gridwidth="120">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>weaponGradeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="rangedAttackType" nxe:singular="Ranged Attack Type" nxe:plural="Ranged Attack Types" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="rangedAttackSoundFile" type="momimegfx:imageFilename" nxe:label="RAT sound file" nxe:gridwidth="150" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="rangedAttackSoundNumber" type="momimecommon:imageNumber" nxe:label="RAT sound number" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="rangedAttackTypeWeaponGrade" type="momimegfx:rangedAttackTypeWeaponGrade" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="rangedAttackTypeCombatImage" type="momimegfx:rangedAttackTypeCombatImage" />
+		</xsd:sequence>
+		<xsd:attribute name="rangedAttackTypeID" type="momimecommon:rangedAttackTypeID" use="required" nxe:label="Ranged Attack Type ID" nxe:gridwidth="120">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>rangedAttackTypeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="rangedAttackTypeWeaponGrade" nxe:singular="RAT Weapon Grade" nxe:plural="RAT Weapon Grades">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="unitDisplayRangedImageFile" type="momimegfx:imageFilename" nxe:label="Unit Display RAT image file" nxe:gridwidth="330" />
+		</xsd:sequence>
+		<xsd:attribute name="weaponGradeNumber" type="momimecommon:weaponGradeNumber" use="required" nxe:label="Weapon Grade Number" nxe:gridwidth="120">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>weaponGradeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="rangedAttackTypeCombatImage" nxe:singular="RAT Combat Image" nxe:plural="RAT Combat Images">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="rangedAttackTypeCombatAnimation" type="momimegfx:animationID" nxe:label="RAT combat animation" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>animationDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="rangedAttackTypeCombatImageFile" type="momimegfx:imageFilename" nxe:label="RAT combat image file" nxe:gridwidth="370" />
+		</xsd:sequence>
+		<xsd:attribute name="rangedAttackTypeActionID" type="momimegfx:rangedAttackTypeActionID" use="required" nxe:label="Action" nxe:gridwidth="100" />
+		<xsd:attribute name="direction" type="map:mapDirection" use="required" nxe:label="Direction" nxe:gridwidth="50" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="spell" nxe:singular="Spell" nxe:plural="Spells" nxe:submenu="Magic">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="combatCastAnimation" type="momimegfx:animationID" nxe:label="Combat cast animation" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>animationDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="combatCastOffsetX" type="momimegfx:pixelCoordinate" nxe:label="Combat cast offset X" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="combatCastOffsetY" type="momimegfx:pixelCoordinate" nxe:label="Combat cast offset Y" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="overlandEnchantmentImageFile" type="momimegfx:imageFilename" nxe:label="Overland enchantment image file" nxe:gridwidth="330" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="spellMusicFile" type="momimegfx:imageFilename" nxe:label="Spell music file" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="spellMusicNumber" type="momimecommon:imageNumber" nxe:label="Spell music number" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="soundAndImageDelay" type="momimegfx:seconds" nxe:label="Sound &amp; image delay" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="spellSoundFile" type="momimegfx:imageFilename" nxe:label="Spell sound file" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="spellSoundNumber" type="momimecommon:imageNumber" nxe:label="Spell sound number" nxe:gridwidth="150" />
+		</xsd:sequence>
+		<xsd:attribute name="spellID" type="momimecommon:spellID" use="required" nxe:label="Spell ID" nxe:gridwidth="60">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>spellName</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="combatAction" nxe:singular="Combat Action" nxe:plural="Combat Actions" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="combatActionDescription" type="momimecommon:description" nxe:label="Description" nxe:gridwidth="250" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="defaultActionSoundFile" type="momimegfx:imageFilename" nxe:label="Default action sound file" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="defaultActionSoundNumber" type="momimecommon:imageNumber" nxe:label="Default action sound number" nxe:gridwidth="150" />
+		</xsd:sequence>
+		<xsd:attribute name="combatActionID" type="momimegfx:combatActionID" use="required" nxe:label="Combat Action ID" nxe:gridwidth="100" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="unitType" nxe:singular="Unit Type" nxe:plural="Unit Types" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="experienceLevel" type="momimegfx:experienceLevel" />
+		</xsd:sequence>
+		<xsd:attribute name="unitTypeID" type="momimecommon:unitTypeID" use="required" nxe:label="Unit Type ID" nxe:gridwidth="100" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="experienceLevel" nxe:singular="Experience Level" nxe:plural="Experience Levels">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="experienceLevelImageFile" type="momimegfx:imageFilename" nxe:label="Name" nxe:gridwidth="300" />
+		</xsd:sequence>
+		<xsd:attribute name="levelNumber" type="momimecommon:experienceLevelNumber" use="required" nxe:label="Level" nxe:gridwidth="50">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>experienceRequired</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="unit" nxe:singular="Unit" nxe:plural="Units" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="unitSummonImageFile" type="momimegfx:imageFilename" nxe:label="Summoning image file" nxe:gridwidth="280" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="unitOverlandImageFile" type="momimegfx:imageFilename" nxe:label="Overland image file" nxe:gridwidth="280" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="heroPortraitImageFile" type="momimegfx:imageFilename" nxe:label="Hero Portrait image file" nxe:gridwidth="280" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="secondaryUnitID" type="momimecommon:unitID" nxe:label="Secondary unit" nxe:gridwidth="200" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="unitCombatAction" type="momimegfx:unitCombatAction" />
+		</xsd:sequence>
+		<xsd:attribute name="unitID" type="momimecommon:unitID" use="required" nxe:label="Unit ID" nxe:gridwidth="80">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>unitName</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="unitCombatAction" nxe:singular="Unit Combat Action" nxe:plural="Unit Combat Actions">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="overrideActionSoundFile" type="momimegfx:imageFilename" nxe:label="Override action sound file" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="overrideActionSoundNumber" type="momimecommon:imageNumber" nxe:label="Override action sound number" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="unitCombatImage" type="momimegfx:unitCombatImage" />
+		</xsd:sequence>
+		<xsd:attribute name="combatActionID" type="momimegfx:combatActionID" use="required" nxe:label="Combat Action ID" nxe:gridwidth="100">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>combatActionDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="unitCombatImage" nxe:singular="Unit Combat Image" nxe:plural="Unit Combat Images">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="unitCombatAnimation" type="momimegfx:animationID" nxe:label="Unit combat animation" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>animationDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="unitCombatImageFile" type="momimegfx:imageFilename" nxe:label="Unit combat image file" nxe:gridwidth="270" />
+		</xsd:sequence>
+		<xsd:attribute name="direction" type="map:mapDirection" use="required" nxe:label="Direction" nxe:gridwidth="50" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tileSet" nxe:singular="Tile Set" nxe:plural="Tile Sets" nxe:submenu="Overland Map">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="tileSetName" type="momimecommon:description" nxe:label="Description" nxe:gridwidth="100" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="directions" type="map:mapDirection" nxe:label="No. of Directions" nxe:gridwidth="120" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="smoothingSystem" type="momimegfx:smoothingSystem" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="smoothedTileType" type="momimegfx:smoothedTileType" />
+		</xsd:sequence>
+		<xsd:attribute name="tileSetID" type="momimegfx:tileSetID" use="required" nxe:label="Tile Set ID" nxe:gridwidth="100" />
+	</xsd:complexType>
+
+	<xsd:complexType name="smoothingSystem" nxe:singular="Smoothing System" nxe:plural="Smoothing Systems">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="smoothingSystemDescription" type="momimecommon:description" nxe:label="Description" nxe:gridwidth="250" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="maxValueEachDirection" type="momimegfx:bit" nxe:label="Max. possible value of each bit in bitmasks" nxe:gridwidth="220" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="smoothingReduction" type="momimegfx:smoothingReduction" />
+		</xsd:sequence>
+		<xsd:attribute name="smoothingSystemID" type="momimegfx:smoothingSystemID" use="required" nxe:label="Smoothing System ID" nxe:gridwidth="150" />
+	</xsd:complexType>
+
+	<xsd:complexType name="smoothingReduction" nxe:singular="Smoothing Reduction Rule" nxe:plural="Smoothing Reduction Rules">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="direction1" type="momimecommon:directions" nxe:label="If (1) out of direction(s)" nxe:gridwidth="100" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="repetitions1" type="momimegfx:directionCount" nxe:label="(1) this number of them" nxe:gridwidth="100" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="value1" type="momimegfx:possibleBitValues" nxe:label="(1) equal any of these values" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="direction2" type="momimecommon:directions" nxe:label="and (2) out of direction(s)" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="repetitions2" type="momimegfx:directionCount" nxe:label="(2) this number of them" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="value2" type="momimegfx:possibleBitValues" nxe:label="(2) equal any of these values" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="direction3" type="momimecommon:directions" nxe:label="and (3) out of direction(s)" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="repetitions3" type="momimegfx:directionCount" nxe:label="(3) this number of them" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="value3" type="momimegfx:possibleBitValues" nxe:label="(3) equal any of these values" nxe:gridwidth="100" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="setDirection1" type="map:mapDirection" nxe:label="then (a) set direction" nxe:gridwidth="100" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="setValue1" type="momimegfx:bit" nxe:label="(a) to this value" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="setDirection2" type="map:mapDirection" nxe:label="and (b) set direction" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="setValue2" type="momimegfx:bit" nxe:label="(b) to this value" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="description" type="momimecommon:description" nxe:label="Description" nxe:gridwidth="300" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="smoothedTileType" nxe:singular="Smoothed Tile Type" nxe:plural="Smoothed Tile Types">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="smoothingSystemID" type="momimegfx:smoothingSystemID" nxe:label="Smoothing System ID" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>tileTypeDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="secondaryTileTypeID" type="momimenewgame:tileTypeID" nxe:label="Secondary Tile Type ID" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>tileTypeDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="tertiaryTileTypeID" type="momimenewgame:tileTypeID" nxe:label="Tertiary Tile Type ID" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>tileTypeDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="combatTileTypeID" type="momimecommon:combatTileTypeID" nxe:label="Combat Tile Type ID" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>combatTileTypeDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="tileOffsetX" type="momimegfx:pixelCoordinate" nxe:label="Tile offset X" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="tileOffsetY" type="momimegfx:pixelCoordinate" nxe:label="Tile offset Y" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="smoothedTile" type="momimegfx:smoothedTile" />
+		</xsd:sequence>
+		<xsd:attribute name="tileTypeID" type="momimenewgame:tileTypeID" use="optional" nxe:label="Tile Type ID" nxe:gridwidth="80">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>tileTypeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="planeNumber" type="momimenewgame:planeNumber" use="optional" nxe:label="Plane Number" nxe:gridwidth="80">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>planeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="smoothedTile" nxe:singular="Smoothed Tile" nxe:plural="Smoothed Tiles">
+        <xsd:annotation>
+        	<xsd:documentation>Note its valid for the same bitmask to be repeated multiple times; in this case an image will be chosen at random.</xsd:documentation>
+        </xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="tileAnimation" type="momimegfx:animationID" nxe:label="Tile animation" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>animationDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="tileFile" type="momimegfx:imageFilename" nxe:label="Tile image file" nxe:gridwidth="400" />
+		</xsd:sequence>
+		<xsd:attribute name="bitmask" type="momimegfx:bitmask" use="required" nxe:label="Bitmask" nxe:gridwidth="80" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="unitSkill" nxe:singular="Unit Skill" nxe:plural="Unit Skills" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="unitSkillImageFile" type="momimegfx:imageFilename" nxe:label="Unit skill image file" nxe:gridwidth="270" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="movementIconImageFile" type="momimegfx:imageFilename" nxe:label="Movement icon image file" nxe:gridwidth="270" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="movementIconImagePreference" type="momimegfx:rulePreferenceWeighting" nxe:label="Movement icon image preference weighting" nxe:gridwidth="200" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="sampleTileImageFile" type="momimegfx:imageFilename" nxe:label="Sample Tile image file" nxe:gridwidth="350" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="standActionID" type="momimegfx:combatActionID" nxe:label="Standing combat action ID" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>combatActionDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="moveActionID" type="momimegfx:combatActionID" nxe:label="Moving combat action ID" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>combatActionDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="unitSkillID" type="momimecommon:unitSkillID" use="required" nxe:label="Unit Skill ID" nxe:gridwidth="100">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>unitSkillDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="weaponGrade" nxe:singular="Weapon Grade" nxe:plural="Weapon Grades" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="weaponGradeMiniImageFile" type="momimegfx:imageFilename" nxe:label="Weapon grade mini image file" nxe:gridwidth="300" />
+		</xsd:sequence>
+		<xsd:attribute name="weaponGradeNumber" type="momimecommon:weaponGradeNumber" use="required" nxe:label="Weapon Grade Number" nxe:gridwidth="120">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>weaponGradeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="combatTileUnitRelativeScale" nxe:singular="Combat Tile Unit Relative Scale" nxe:plural="Combat Tile Unit Relative Scales" nxe:submenu="Units">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="combatTileFigurePositions" type="momimegfx:combatTileFigurePositions" />
+		</xsd:sequence>
+		<xsd:attribute name="scale" type="momimegfx:combatTileUnitRelativeScaleID" use="required" nxe:label="Scale" nxe:gridwidth="60" />
+	</xsd:complexType>
+
+	<xsd:complexType name="combatTileFigurePositions" nxe:singular="Figure Count" nxe:plural="Figure Counts">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="figurePositionsForFigureCount" type="momimegfx:figurePositionsForFigureCount" />
+		</xsd:sequence>
+		<xsd:attribute name="figureCount" type="momimecommon:figureCount" use="required" nxe:label="Figure Count" nxe:gridwidth="100" />
+	</xsd:complexType>
+
+	<xsd:complexType name="figurePositionsForFigureCount" nxe:singular="Figure Position" nxe:plural="Figure Positions">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="tileRelativeX" type="momimegfx:pixelCoordinate" nxe:label="Tile relative X" nxe:gridwidth="150" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="tileRelativeY" type="momimegfx:pixelCoordinate" nxe:label="Tile relative Y" nxe:gridwidth="150" />
+		</xsd:sequence>
+		<xsd:attribute name="figureNumber" type="momimecommon:figureCount" use="required" nxe:label="Figure Count" nxe:gridwidth="100" />
+	</xsd:complexType>
+
+	<xsd:complexType name="animation" nxe:singular="Animation" nxe:plural="Animations">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="animationDescription" type="momimecommon:description" nxe:label="Description" nxe:gridwidth="300" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="animationSpeed" type="momimegfx:frameRate" nxe:label="Speed / Frame Rate" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="frame" type="momimegfx:animationFrame" />
+		</xsd:sequence>
+		<xsd:attribute name="animationID" type="momimegfx:animationID" use="required" nxe:label="Animation ID" nxe:gridwidth="150" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="animationFrame" nxe:singular="Frame" nxe:plural="Frames">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="frameImageFile" type="momimegfx:imageFilename" nxe:label="Frame image file" nxe:gridwidth="350" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="cityViewElementSet" nxe:singular="City View Element Set" nxe:plural="City View Element Sets" nxe:submenu="City View">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="cityViewElementSetName" type="momimecommon:description" nxe:label="Description" nxe:gridwidth="100" />
+		</xsd:sequence>
+		<xsd:attribute name="cityViewElementSetID" type="momimegfx:cityViewElementSetID" use="required" nxe:label="City View Element Set ID" nxe:gridwidth="150" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="cityViewElement" nxe:singular="City View Element" nxe:plural="City View Elements" nxe:submenu="City View">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="cityViewAnimation" type="momimegfx:animationID" nxe:label="Image animation" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>animationDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="cityViewImageFile" type="momimegfx:imageFilename" nxe:label="Image file" nxe:gridwidth="300" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="cityViewElementSetID" type="momimegfx:cityViewElementSetID" nxe:label="Element Set" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="locationX" type="momimegfx:pixelCoordinate" nxe:label="Location X" nxe:gridwidth="100">
+		        <xsd:annotation>
+        			<xsd:documentation>Location is optional; this is for Trade Goods + Housing special settings that have an image defined but don't appear on the actual city scape image.</xsd:documentation>
+        		</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="locationY" type="momimegfx:pixelCoordinate" nxe:label="Location Y" nxe:gridwidth="100">
+		        <xsd:annotation>
+        			<xsd:documentation>Location is optional; this is for Trade Goods + Housing special settings that have an image defined but don't appear on the actual city scape image.</xsd:documentation>
+        		</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="planeNumber" type="momimenewgame:planeNumber" nxe:label="Plane Number" nxe:gridwidth="80">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>planeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="citySpellEffectID" type="momimecommon:citySpellEffectID" nxe:label="City Spell Effect" nxe:gridwidth="150" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="sizeMultiplier" type="momimegfx:sizeMultiplier" nxe:label="Size Multiplier" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="tileTypeID" type="momimenewgame:tileTypeID" nxe:label="Tile Type" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>tileTypeDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="buildingID" type="momimecommon:buildingID" nxe:label="Building" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>buildingName</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="cityViewAlternativeImageFile" type="momimegfx:imageFilename" nxe:label="Alternative image file" nxe:gridwidth="300" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="combatAreaEffect" nxe:singular="Combat Area Effect" nxe:plural="Combat Area Effects" nxe:submenu="Magic">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="combatAreaEffectImageFile" type="momimegfx:imageFilename" nxe:label="CAE image file" nxe:gridwidth="290" />
+		</xsd:sequence>
+		<xsd:attribute name="combatAreaEffectID" type="momimecommon:combatAreaEffectID" use="required" nxe:label="Combat Area Effect ID" nxe:gridwidth="120">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>combatAreaEffectDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="tileType" nxe:singular="Tile Type" nxe:plural="Tile Types" nxe:submenu="Overland Map">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="monsterFoundImageFile" type="momimegfx:imageFilename" nxe:label="Monster Found image file" nxe:gridwidth="380" />
+		</xsd:sequence>
+		<xsd:attribute name="tileTypeID" type="momimenewgame:tileTypeID" use="required" nxe:label="Tile Type ID" nxe:gridwidth="100">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>tileTypeDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="mapFeature" nxe:singular="Map Feature" nxe:plural="Map Features" nxe:submenu="Overland Map">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="monsterFoundImageFile" type="momimegfx:imageFilename" nxe:label="Monster Found image file" nxe:gridwidth="380" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="overlandMapImageFile" type="momimegfx:imageFilename" nxe:label="Overland Map image file" nxe:gridwidth="380" />
+		</xsd:sequence>
+		<xsd:attribute name="mapFeatureID" type="momimecommon:mapFeatureID" use="required" nxe:label="Map Feature ID" nxe:gridwidth="100">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<nxe:showreferencedfield>mapFeatureDescription</nxe:showreferencedfield>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="cityImage" nxe:singular="City Image" nxe:plural="City Images" nxe:submenu="Overland Map">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="citySizeID" type="momimecommon:citySizeID" nxe:label="City Size ID" nxe:gridwidth="100">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>citySizeMinimum</nxe:showreferencedfield>
+						<nxe:showreferencedfield>citySizeMaximum</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="cityImageFile" type="momimegfx:imageFilename" nxe:label="City image file" nxe:gridwidth="320" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="flagOffsetX" type="momimegfx:pixelCoordinate" nxe:label="Flag offset X" nxe:gridwidth="150" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="flagOffsetY" type="momimegfx:pixelCoordinate" nxe:label="Flag offset Y" nxe:gridwidth="150" />
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="cityImagePrerequisite" type="momimegfx:cityImagePrerequisite" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="cityImagePrerequisite" nxe:singular="City Image Prerequisite" nxe:plural="City Image Prerequisites">
+		<xsd:attribute name="prerequisiteID" type="momimecommon:buildingID" use="required" nxe:label="Building ID" nxe:gridwidth="65" />
+	</xsd:complexType>
+
+	<xsd:complexType name="combatTileBorderImage" nxe:singular="Combat Tile Border Image" nxe:plural="Combat Tile Border Images" nxe:submenu="Combat Map">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="combatTileBorderID" type="momimecommon:combatTileBorderID" nxe:label="Combat Tile Border ID" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="directions" type="momimecommon:directions" nxe:label="Direction(s)" nxe:gridwidth="100" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="frontOrBack" type="momimegfx:frontOrBack" nxe:label="Front/Back" nxe:gridwidth="100" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="standardAnimation" type="momimegfx:animationID" nxe:label="Standard animation" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>animationDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" maxOccurs="1" name="standardFile" type="momimegfx:imageFilename" nxe:label="Standard image file" nxe:gridwidth="350" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="wreckedFile" type="momimegfx:imageFilename" nxe:label="Wrecked image file" nxe:gridwidth="350" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="raisingAnimation" type="momimegfx:animationID" nxe:label="Raising animation" nxe:gridwidth="150">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<nxe:showreferencedfield>animationDescription</nxe:showreferencedfield>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" maxOccurs="1" name="sortPosition" type="momimegfx:sortPosition" nxe:label="Sort position" nxe:gridwidth="150" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="playList" nxe:singular="Play list" nxe:plural="Play lists">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="unbounded" name="audioFile" type="momimegfx:imageFilename" />
+		</xsd:sequence>
+		<xsd:attribute name="playListID" type="momimegfx:playListID" use="required" nxe:label="Play list ID" nxe:gridwidth="150" />
+	</xsd:complexType>
+
+<!-- Simple data types -->
+	
+	<xsd:simpleType name="imageFilename">
+        <xsd:annotation>
+        	<xsd:documentation>Image filename such as CITYSCAP.LBX or MOMADDITIONALGRAPHICS.NDGARC.  Also used for sound and music filenames.</xsd:documentation>
+        </xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="animationID">
+		<xsd:restriction base="xsd:normalizedString" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="combatActionID">
+		<xsd:restriction base="xsd:normalizedString" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="tileSetID">
+		<xsd:restriction base="xsd:normalizedString" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="smoothingSystemID">
+		<xsd:restriction base="xsd:normalizedString" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="combatTileUnitRelativeScaleID">
+		<xsd:restriction base="xsd:unsignedShort" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="cityViewElementSetID">
+		<xsd:restriction base="xsd:normalizedString" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="pixelCoordinate">
+		<xsd:restriction base="xsd:int" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="seconds">
+		<xsd:restriction base="xsd:unsignedShort" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="directionCount">
+		<xsd:restriction base="xsd:unsignedShort" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="rulePreferenceWeighting">
+		<xsd:restriction base="xsd:unsignedShort" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="frameRate">
+		<xsd:restriction base="xsd:double" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="sizeMultiplier">
+		<xsd:restriction base="xsd:unsignedShort" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="sortPosition">
+		<xsd:restriction base="xsd:unsignedShort" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="playListID">
+		<xsd:restriction base="xsd:normalizedString" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="productionImageValue">
+        <xsd:annotation>
+        	<xsd:documentation>Production quantities that the client expects to be able to find images for; not all values are required for all types of production.</xsd:documentation>
+        </xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="10" />
+			<xsd:enumeration value="-1" />
+			<xsd:enumeration value="-10" />
+			<xsd:enumeration value="½" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="bit">
+        <xsd:annotation>
+        	<xsd:documentation>1 if the tile type at a particular location equals a certain value, 0 if its something else.  2 is a special case for river mouths.</xsd:documentation>
+        </xsd:annotation>
+		<xsd:restriction base="xsd:int">
+			<xsd:enumeration value="0" />
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="2" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="possibleBitValues">
+        <xsd:annotation>
+        	<xsd:documentation>Possible values to test a number of bits against.</xsd:documentation>
+        </xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="0" />
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="2" />
+			<xsd:enumeration value="01" />
+			<xsd:enumeration value="02" />
+			<xsd:enumeration value="12" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="bitmask">
+        <xsd:annotation>
+        	<xsd:documentation>Set of 8 values denoting bit value of each tile type in if we move in each of the 8 direction from here; or the special value "NoSmooth".</xsd:documentation>
+        </xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:length value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="rangedAttackTypeActionID">
+        <xsd:annotation>
+        	<xsd:documentation>Types of action we can define an image for a ranged attack type for.</xsd:documentation>
+        </xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="FLY">
+				<xsd:annotation><xsd:documentation>Image of the rock/fireball/etc flying towards its target</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="STRIKE">
+				<xsd:annotation><xsd:documentation>Image of the rock/fireball/etc striking its target</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="frontOrBack">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="F"><xsd:annotation>
+				<xsd:documentation>Front</xsd:documentation>
+				<xsd:appinfo><jaxb:typesafeEnumMember name="FRONT"/></xsd:appinfo>
+			</xsd:annotation></xsd:enumeration>
+			<xsd:enumeration value="B"><xsd:annotation>
+				<xsd:documentation>Back</xsd:documentation>
+				<xsd:appinfo><jaxb:typesafeEnumMember name="BACK"/></xsd:appinfo>
+			</xsd:annotation></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
