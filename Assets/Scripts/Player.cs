@@ -23,7 +23,7 @@ public class Player {
 		this.name = name;
 	}
 
-	public Player(string name, string race, string wizard, string spellpick, string specialAbility, string banner, string homeCityName){
+	public Player(string name, string race, string wizard, string portrait, string spellpick, string specialAbility, string banner, string homeCityName){
 		this.name = name;
 		this.race = race;
 		this.wizard = wizard;
