@@ -11,6 +11,7 @@ public class CharCreateScreen : MonoBehaviour {
 	public string banner = "banner";
 	public string homeCityName = "homeCityName";
 	string[] stringToEdit;
+	string[] label;
 	// Use this for initialization
 	void Start () {
 
@@ -24,14 +25,16 @@ public class CharCreateScreen : MonoBehaviour {
 		addOnGUI (specialAbility, 140);
 		addOnGUI (banner, 160);
 		addOnGUI (homeCityName, 180);*/
-		for (int i = 0; i < stringToEdit.Length; ++i)
-			stringToEdit[i] = GUI.TextField(new Rect(60, i*20, 100, 20),stringToEdit[i] , 25);
-			//stringToEdit[i] = GUILayout.TextField(stringToEdit[i], 5, GUILayout.Width(100));
+		for (int i = 0; i < stringToEdit.Length; ++i) {
+						stringToEdit [i] = GUI.TextField (new Rect (150, i * 20, 100, 20), stringToEdit [i], 25);
+						GUI.Label(new Rect(50, i*20, 100, 20), label[i]);
+						//stringToEdit[i] = GUILayout.TextField(stringToEdit[i], 5, GUILayout.Width(100));
+				}
 	}
 
 	void addOnGUI(string name, int yaxis){
 
-		name = GUI.TextField(new Rect(60, yaxis, 100, 20), name, 25);
+		name = GUI.TextField(new Rect(40, yaxis, 100, 20), name, 25);
 		}
 	// Update is called once per frame
 	void Update () {
@@ -60,7 +63,18 @@ public class CharCreateScreen : MonoBehaviour {
 	void Awake(){
 		Input.eatKeyPressOnTextFieldFocus = false;
 		stringToEdit = new string[8];
-		for (int i = 0; i < stringToEdit.Length; ++i)
-			stringToEdit[i] = string.Empty;
+		label = new string[8];
+		for (int i = 0; i < stringToEdit.Length; ++i) {
+				stringToEdit [i] = string.Empty;
+				label [i] = string.Empty;
+				}
+		label [0] = "name";
+		label [1]= "race";
+		label [2]= "Select wizard";
+		label [3] = "Select Portrait";
+		label [4] = "spellPick";
+		label [5] = "speicalAbility";
+		label [6] = "banner";
+		label [7] = "homeCityName";
 	}
 }
