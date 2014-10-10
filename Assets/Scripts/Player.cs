@@ -128,15 +128,42 @@ public class Player {
 		// when loading player, the name will be available
 		writetext.WriteLine(race);
 		writetext.WriteLine(wizard);
+		writetext.WriteLine(portrait);
+		writetext.WriteLine(spellRank.ToString);
+		writetext.WriteLine(spellPick);
+		writetext.WriteLine(specialAbility);
+		writetext.WriteLine(banner);
+		writetext.WriteLine(homeCityName);
 		// more writing here
 		writetext.Close();
+
+		StreamWriter writetext2 = new StreamWriter ("Character.txt");
+		writetext.WriteLine (name);
+		writetext.Close ();
 	}
+
+	/*
+	private string name;
+	private string race;
+	private string wizard;
+	private string portrait;
+	private int spellRank;
+	private string spellPick;
+	private string specialAbility;
+	private string banner;
+	private string homeCityName;
+	*/
 
 	public void load(){
 		string fileName = name + ".txt";
 		StreamReader readtext = new StreamReader(fileName);
-		race = readtext.ReadLine ();
-		wizard = readtext.ReadLine ();
+		race = readtext.ReadLine();
+		wizard = readtext.ReadLine();
+		portrait = readtext.ReadLine();
+		spellRank = Int32.Parse(readtext.ReadLine());
+		specialAbility = readtext.ReadLine ();
+		banner = readtext.ReadLine ();
+		homeCityName = readtext.ReadLine ();
 		// more loading here
 		readtext.Close();
 	}
