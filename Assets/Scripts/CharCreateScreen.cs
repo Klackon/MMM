@@ -38,9 +38,8 @@ public class CharCreateScreen : MonoBehaviour {
 		}
 	// Update is called once per frame
 	void Update () {
-		// switch to game
-		if(Input.GetKeyDown(KeyCode.G)){
-			Application.LoadLevel(1);
+		// save fields
+		if(Input.GetKeyDown(KeyCode.Return)){
 			name = stringToEdit[0].ToString();
 			race = stringToEdit[1].ToString();
 			wizard = stringToEdit[2].ToString();
@@ -51,6 +50,26 @@ public class CharCreateScreen : MonoBehaviour {
 			homeCityName = stringToEdit[7].ToString();
 			print (homeCityName);
 			Player player1 = new Player(name,race,wizard,portrait,spellPick,specialAbility,banner,homeCityName);
+			player1.save();
+		}
+
+		// switch to game
+		if(Input.GetKeyDown(KeyCode.G)){
+			/*
+			name = stringToEdit[0].ToString();
+			race = stringToEdit[1].ToString();
+			wizard = stringToEdit[2].ToString();
+			portrait = stringToEdit[3].ToString();
+			spellPick = stringToEdit[4].ToString();
+			specialAbility = stringToEdit[5].ToString();
+			banner = stringToEdit[6].ToString();
+			homeCityName = stringToEdit[7].ToString();
+			print (homeCityName);
+			Player player1 = new Player(name,race,wizard,portrait,spellPick,specialAbility,banner,homeCityName);
+			player1.save();
+			*/
+
+			Application.LoadLevel(1);
 		}
 
 		// switch to menu

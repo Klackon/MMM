@@ -1,0 +1,8 @@
+Klackon
+Warlock
+Portrait
+1
+
+Ability
+Banner
+City

@@ -5,6 +5,10 @@ public class GameManager : MonoBehaviour {
 
 	private ImmediateStateMachine stateMachine = new ImmediateStateMachine ();
 	int n;
+	GameObject player;
+	PlayerManager playerScript;
+	GameObject[] enemy;
+	EnemyManager enemyScript;
 
 	// Use this for initialization
 	void Start () {
@@ -119,10 +123,18 @@ public class GameManager : MonoBehaviour {
 	void enterGAME() {
 		//Application.LoadLevel(1);
 		Debug.Log("ENTER GAME");
+		
+		// Load the character\
+		player = GameObject.FindGameObjectWithTag("Player");
+		if(player != null){
+			playerScript = player.GetComponent<PlayerManager>();
+		}
+		enemy = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 	void updateGAME() {
-		if(Input.GetKeyDown(KeyCode.P)){
-			switchToPauseFSM();
+
+		if(Input.GetKeyDown(KeyCode.Return)){
+			switchToPlayerTurnFSM();
 		}
 
 		if(Input.GetKeyDown(KeyCode.O)){
@@ -156,6 +168,61 @@ public class GameManager : MonoBehaviour {
 	}
 	void exitPAUSE () {
 		Debug.Log("EXIT PAUSE");
+	}
+
+	public void switchToPlayerTurnFSM() {
+		stateMachine.ChangeState(enterPLAYERTURN, updatePLAYERTURN, exitPLAYERTURN);
+	}
+	
+	void enterPLAYERTURN(){
+		if(player == null){ 
+			Debug.Log ("ERROR: PLAYER NOT FOUND");
+			switchToGameFSM();
+		}
+		if(enemy == null){
+			Debug.Log("ERROR: NO ENEMIES FOUND");
+			switchToGameFSM();
+		}
+	}
+	
+	void updatePLAYERTURN(){
+		if(Input.GetKeyDown(KeyCode.P)) switchToPauseFSM();
+		if(Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
+		
+		//LOGIC FOR GAMEPPLAY HERE
+		
+		if(Input.GetKeyDown(KeyCode.Return)){
+			switchToEnemyTurnFSM();
+		}
+	}
+	
+	void exitPLAYERTURN(){
+		// AUTOSAVE??
+	}
+	
+	public void switchToEnemyTurnFSM() {
+		stateMachine.ChangeState(enterENEMYTURN, updateENEMYTURN, exitENEMYTURN);
+	}
+	
+	void enterENEMYTURN(){
+		
+	}
+	
+	void updateENEMYTURN(){
+		// Run through enemy logic
+		if(enemy!=null){
+			foreach(GameObject e in enemy){
+				enemyScript = e.GetComponent<EnemyManager>();
+				// enemies do enemy things
+			}
+		}
+		
+		// When complete
+		switchToPlayerTurnFSM();
+	}
+	
+	void exitENEMYTURN(){
+		
 	}
 
 	/*
