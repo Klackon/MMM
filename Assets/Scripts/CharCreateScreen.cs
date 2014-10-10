@@ -47,6 +47,7 @@ public class CharCreateScreen : MonoBehaviour {
 			banner = stringToEdit[6].ToString();
 			homeCityName = stringToEdit[7].ToString();
 			print (homeCityName);
+			Player player1 = new Player(name,race,wizard,portrait,spellPick,specialAbility,banner,homeCityName);
 		}
 
 		// switch to menu
