@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class Player {
 
@@ -11,19 +12,35 @@ public class Player {
 	private int spellRank;
 	private string spellPick;
 	private string specialAbility;
-	private int banner;
+	private string banner;
 	private string homeCityName;
-	// constructor
 
+	// constructors
+	// depending on how we will implement the character create screen
+	// we might initialize all fields all at once
+	// this constructor is for loading a existing player
 	public Player(string name){
 		this.name = name;
+	}
+
+	public Player(string name, string race, string wizard, string spellpick, string specialAbility, string banner, string homeCityName){
+		this.name = name;
+		this.race = race;
+		this.wizard = wizard;
+		this.portrait = portrait;
+		spellRank = 1;
+		this.spellPick = spellPick;
+		this.specialAbility = specialAbility;
+		this.banner = banner;
+		this.homeCityName = homeCityName;
+
 	}
 
 	public string getName(){
 		return name;
 	}
 
-	// since creatingi character is step-by-step
+	// since creating character is step-by-step
 	// will probably call method to instantiate the fields
 
 	public void selectRace(string race){
@@ -46,6 +63,9 @@ public class Player {
 		this.homeCityName = homeCityName;
 	}
 
+	public void intializeSpellRank(){
+		spellRank = 1;
+	}
 
 
 
@@ -61,12 +81,38 @@ public class Player {
 		return wizard;
 	}
 
+	public string getPortrait(){
+		return portrait;
+	}
+
+	public int getSpellRank(){
+		return spellRank;
+	}
+
+	public string getSpellPick(){
+		return spellPick;
+	}
+
+	public string getSpecialAbility(){
+		return specialAbility;
+	}
+
+	public int getBanner(){
+		return banner;
+	}
+
+	public string getCityName(){
+		return homeCityName;
+	}
+
+
+
 	// need to save all fields of a player
 	// if we decide to implement saving  the game
 	// as one of our features
 
 
-
+	// 
 	// other methods
 
 	// set spellRank with returned value
@@ -74,12 +120,26 @@ public class Player {
 		spellRank = toSet;
 	}
 
-	public int getSpellRank(){
-		return spellRank;
+
+	// for saving and loading, the order is fixed
+	public void save(){
+		StreamWriter writetext = new StreamWriter(name + ".txt");
+		// writetext.WriteLine(name); don't need this
+		// when loading player, the name will be available
+		writetext.WriteLine(race);
+		writetext.WriteLine(wizard);
+		// more writing here
+		writetext.Close();
 	}
 
-
-
+	public void load(){
+		string fileName = name + ".txt";
+		StreamReader readtext = new StreamReader(fileName);
+		race = readtext.ReadLine ();
+		wizard = readtext.ReadLine ();
+		// more loading here
+		readtext.Close();
+	}
 
 
 
