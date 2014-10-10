@@ -51,7 +51,7 @@ public class Player {
 		this.wizard = wizard;
 	}
 
-	public void selectBanner(int banner){
+	public void selectBanner(string banner){
 		this.banner = banner;
 	}
 
@@ -97,7 +97,7 @@ public class Player {
 		return specialAbility;
 	}
 
-	public int getBanner(){
+	public string getBanner(){
 		return banner;
 	}
 
