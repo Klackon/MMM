@@ -126,7 +126,7 @@ public class Player {
 		writetext.WriteLine(race);
 		writetext.WriteLine(wizard);
 		writetext.WriteLine(portrait);
-		writetext.WriteLine(spellRank.ToString);
+		writetext.WriteLine(spellRank.ToString());
 		writetext.WriteLine(spellPick);
 		writetext.WriteLine(specialAbility);
 		writetext.WriteLine(banner);
@@ -157,7 +157,9 @@ public class Player {
 		race = readtext.ReadLine();
 		wizard = readtext.ReadLine();
 		portrait = readtext.ReadLine();
-		spellRank = Int32.Parse(readtext.ReadLine());
+		int parsedInt = 0;
+		int.TryParse (readtext.ReadLine(), out parsedInt);
+		spellRank = parsedInt;
 		specialAbility = readtext.ReadLine ();
 		banner = readtext.ReadLine ();
 		homeCityName = readtext.ReadLine ();
