@@ -68,9 +68,6 @@ public class Player {
 	}
 
 
-
-
-
 	// not all field requires getters
 
 	public string getRace(){
