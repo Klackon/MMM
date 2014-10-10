@@ -25,15 +25,7 @@ public class CharCreateScreen : MonoBehaviour {
 		addOnGUI (banner, 160);
 		addOnGUI (homeCityName, 180);*/
 		for (int i = 0; i < stringToEdit.Length; ++i)
-			stringToEdit[i] = GUI.TextField(new Rect(120, i*20, 100, 20),stringToEdit[i] , 25);
-		GUI.Label (new Rect (35, 0, 100, 20), "Name");
-		GUI.Label (new Rect (35, 20, 100, 20), "Race");
-		GUI.Label (new Rect (35, 40, 100, 20), "Wizard");
-		GUI.Label (new Rect (35, 60, 100, 20), "Portrait");
-		GUI.Label (new Rect (35, 80, 100, 20), "Spell Pick");
-		GUI.Label (new Rect (35, 100, 100, 20), "Special Ability");
-		GUI.Label (new Rect (35, 120, 100, 20), "Banner");
-		GUI.Label (new Rect (35, 140, 100, 20), "Home City");
+			stringToEdit[i] = GUI.TextField(new Rect(60, i*20, 100, 20),stringToEdit[i] , 25);
 			//stringToEdit[i] = GUILayout.TextField(stringToEdit[i], 5, GUILayout.Width(100));
 	}
 
