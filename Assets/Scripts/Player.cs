@@ -135,8 +135,8 @@ public class Player {
 		writetext.Close();
 
 		StreamWriter writetext2 = new StreamWriter ("Character.txt");
-		writetext.WriteLine (name);
-		writetext.Close ();
+		writetext2.WriteLine (name);
+		writetext2.Close ();
 	}
 
 	/*
