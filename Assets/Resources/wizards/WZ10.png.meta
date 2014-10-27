@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: 5dd9f3e0a8d76418d8d735aaf18ac03b
+guid: d136b4b80275d4ff88b866ebbfae06b6
 TextureImporter:
   fileIDToRecycleName:
-    21300000: WZ05
+    21300000: WZ10
+    21300002: WZ0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +27,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
