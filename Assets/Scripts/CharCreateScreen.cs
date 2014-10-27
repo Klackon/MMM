@@ -116,18 +116,12 @@ public class CharCreateScreen : MonoBehaviour {
 		label [0] = "Name";
 		label [1]= "Race";
 		label [2]= "Select wizard";
-<<<<<<< HEAD
-		label [3] = "Select Portrait";
-		label [4] = "SpellPick";
-		label [5] = "SpeicalAbility";
-		label [6] = "Banner";
-		label [7] = "HomeCityName";
-=======
+
 		//label [3] = "Select Portrait";
 		label [3] = "spellPick";
 		label [4] = "speicalAbility";
 		label [5] = "banner";
 		label [6] = "homeCityName";
->>>>>>> FETCH_HEAD
+
 	}
 }
