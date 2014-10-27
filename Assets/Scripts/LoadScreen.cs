@@ -3,17 +3,17 @@ using System.Collections;
 
 public class LoadScreen : MonoBehaviour {
 	private Player player;
-
 	// Use this for initialization
 	void Start () {
+
 
 	}
 
 	void addOnGUI(string name, int yaxis){
 		
 
-	}
 
+	}
 
 
 	
