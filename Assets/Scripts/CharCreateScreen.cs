@@ -61,7 +61,7 @@ public class CharCreateScreen : MonoBehaviour {
 	void addOnGUI(string name, int yaxis){
 
 		name = GUI.TextField(new Rect(40, yaxis, 100, 20), name, 25);
-		}
+	}
 	// Update is called once per frame
 	void Update () {
 		// save fields
