@@ -87,13 +87,13 @@ public class CharCreateScreen : MonoBehaviour {
 				stringToEdit [i] = string.Empty;
 				label [i] = string.Empty;
 				}
-		label [0] = "name";
-		label [1]= "race";
+		label [0] = "Name";
+		label [1]= "Race";
 		label [2]= "Select wizard";
 		label [3] = "Select Portrait";
-		label [4] = "spellPick";
-		label [5] = "speicalAbility";
-		label [6] = "banner";
-		label [7] = "homeCityName";
+		label [4] = "SpellPick";
+		label [5] = "SpeicalAbility";
+		label [6] = "Banner";
+		label [7] = "HomeCityName";
 	}
 }
