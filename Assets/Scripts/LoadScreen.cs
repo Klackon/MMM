@@ -68,7 +68,7 @@ public class LoadScreen : MonoBehaviour {
 			*/
 			name = stringToEdit[0].ToString();
 			Player player = new Player(name);
-			//player.load (); // fix this
+			player.load (); // fix this
 			Debug.Log (name);
 			Application.LoadLevel(1);
 		}
