@@ -3,16 +3,7 @@ using System.Collections;
 
 public class LoadScreen : MonoBehaviour {
 	public string name = "name";
-	public string race = "race";
-	public string wizard = "Select wizard";
-	public string portrait = "1";
-	public string spellPick = "spellPick";
-	public string specialAbility = "speicalAbility";
-	public string banner = "banner";
-	public string homeCityName = "homeCityName";
-	public int wizardNum = 1;
-	public Texture WizardPic;
-	public string texturePath;
+
 	string[] stringToEdit;
 	string[] label;
 	// Use this for initialization
@@ -20,14 +11,7 @@ public class LoadScreen : MonoBehaviour {
 
 	}
 	void OnGUI() {
-		/*addOnGUI (name, 20);
-		addOnGUI (race, 40);
-		addOnGUI (wizard, 60);
-		addOnGUI (portrait, 80);
-		addOnGUI (spellPick, 120);
-		addOnGUI (specialAbility, 140);
-		addOnGUI (banner, 160);
-		addOnGUI (homeCityName, 180);*/
+
 		for (int i = 0; i < 1; ++i) {
 			stringToEdit [i] = GUI.TextField (new Rect (160, i * 20, 100, 20), stringToEdit [i], 25);
 			GUI.Label(new Rect(60, i*20, 100, 20), label[i]);
@@ -52,7 +36,7 @@ public class LoadScreen : MonoBehaviour {
 		}
 		
 		// switch to game
-		if(Input.GetKeyDown(KeyCode.G)){
+		if(Input.GetKeyDown(KeyCode.F1)){
 			/*
 			name = stringToEdit[0].ToString();
 			race = stringToEdit[1].ToString();
@@ -66,9 +50,10 @@ public class LoadScreen : MonoBehaviour {
 			Player player1 = new Player(name,race,wizard,portrait,spellPick,specialAbility,banner,homeCityName);
 			player1.save();
 			*/
+
 			name = stringToEdit[0].ToString();
 			Player player = new Player(name);
-			player.load (); // fix this
+			//player.load (); // fix this
 			Debug.Log (name);
 			Application.LoadLevel(1);
 		}
