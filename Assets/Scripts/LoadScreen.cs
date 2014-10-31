@@ -4,20 +4,18 @@ using System.Collections;
 public class LoadScreen : MonoBehaviour {
 	public string name = "name";
 
-	string[] stringToEdit;
-	string[] label;
+	string stringToEdit;
+	string label;
 	// Use this for initialization
 	void Start () {
 
 	}
 	void OnGUI() {
 
-		for (int i = 0; i < 1; ++i) {
-			stringToEdit [i] = GUI.TextField (new Rect (160, i * 20, 100, 20), stringToEdit [i], 25);
-			GUI.Label(new Rect(60, i*20, 100, 20), label[i]);
-			//stringToEdit[i] = GUILayout.TextField(stringToEdit[i], 5, GUILayout.Width(100));
-		}
 
+		stringToEdit = GUI.TextField (new Rect (160, 0, 100, 20), stringToEdit, 25);
+		GUI.Label(new Rect(60, 0, 100, 20), label);
+			//stringToEdit[i] = GUILayout.TextField(stringToEdit[i], 5, GUILayout.Width(100));
 	}
 	
 	void addOnGUI(string name, int yaxis){
@@ -28,7 +26,7 @@ public class LoadScreen : MonoBehaviour {
 	void Update () {
 		// save fields
 		if(Input.GetKeyDown(KeyCode.Return)){
-			name = stringToEdit[0].ToString();
+			name = stringToEdit.ToString();
 			/*
 			Player player1 = new Player(name);
 			player1.load();
@@ -37,21 +35,8 @@ public class LoadScreen : MonoBehaviour {
 		
 		// switch to game
 		if(Input.GetKeyDown(KeyCode.F1)){
-			/*
-			name = stringToEdit[0].ToString();
-			race = stringToEdit[1].ToString();
-			wizard = stringToEdit[2].ToString();
-			portrait = stringToEdit[3].ToString();
-			spellPick = stringToEdit[4].ToString();
-			specialAbility = stringToEdit[5].ToString();
-			banner = stringToEdit[6].ToString();
-			homeCityName = stringToEdit[7].ToString();
-			print (homeCityName);
-			Player player1 = new Player(name,race,wizard,portrait,spellPick,specialAbility,banner,homeCityName);
-			player1.save();
-			*/
-
-			name = stringToEdit[0].ToString();
+		
+			name = stringToEdit.ToString();
 			Player player = new Player(name);
 			//player.load (); // fix this
 			Debug.Log (name);
@@ -67,15 +52,13 @@ public class LoadScreen : MonoBehaviour {
 	
 	void Awake(){
 		Input.eatKeyPressOnTextFieldFocus = false;
-		stringToEdit = new string[8];
-		label = new string[8];
-		for (int i = 0; i < stringToEdit.Length; ++i) {
-			stringToEdit [i] = string.Empty;
-			label [i] = string.Empty;
-		}
-		label [0] = "Name";
-	
+		//stringToEdit = new string[1];
+		//label = new string[1];
+
+		stringToEdit = string.Empty;
+		label = string.Empty;
 		
+		label = "Name";
 	}
 
 }
