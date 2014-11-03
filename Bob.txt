@@ -1,8 +1,8 @@
 Klackon
-warlock
-Portrait
+a
+b
 1
 
-Abilikty
-Banner
-City
+d
+e
+Atl
