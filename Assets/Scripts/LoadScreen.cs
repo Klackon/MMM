@@ -42,7 +42,7 @@ public class LoadScreen : MonoBehaviour {
 			Debug.Log (name);
 			Application.LoadLevel(1);
 		}
-		
+
 		// switch to menu
 		if(Input.GetKeyDown(KeyCode.M)){
 			Application.LoadLevel(0);
