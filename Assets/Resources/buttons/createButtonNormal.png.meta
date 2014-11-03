@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: 3012fa422079b4051be36e994fefe86b
+guid: 695ca14d98c2f420d98bce8ea4e4b804
 TextureImporter:
   fileIDToRecycleName:
-    21300000: button98x32greyPressed
+    21300000: button98x32greyNormal
+    21300002: createButtonNormal
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +27,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
