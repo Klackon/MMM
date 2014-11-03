@@ -19,6 +19,7 @@ public class CharCreateScreen : MonoBehaviour {
 	//public Texture createButton;
 	// Use this for initialization
 	void Start () {
+		Screen.SetResolution(600, 500, true);
 		string texturePath = "wizards/WZ01";
 		WizardPic = (Texture)Resources.Load(texturePath, typeof(Texture)); 
 
@@ -39,9 +40,9 @@ public class CharCreateScreen : MonoBehaviour {
 						GUI.Label(new Rect(300, 30+(i*30), 100, 30), label[i]);
 						//stringToEdit[i] = GUILayout.TextField(stringToEdit[i], 5, GUILayout.Width(100));
 				}
+
 		//drawing the default image
 		GUI.DrawTexture(new Rect(40, 30, 210, 220), WizardPic, ScaleMode.StretchToFill, true, 10.0F);
-
 		if (GUI.Button (new Rect (40, 250, 80, 20), "Last")) {
 				if(wizardNum==1){
 					wizardNum = 14;
@@ -52,6 +53,7 @@ public class CharCreateScreen : MonoBehaviour {
 			WizardPic = (Texture)Resources.Load("wizards/WZ"+wizardNum.ToString(), typeof(Texture)); 
 			GUI.DrawTexture(new Rect(40, 30, 210, 220), WizardPic, ScaleMode.StretchToFill, true, 10.0F);
 			}
+
 		if (GUI.Button (new Rect (170, 250, 80, 20), "Next")) {
 			if(wizardNum==14){
 				wizardNum = 1;
