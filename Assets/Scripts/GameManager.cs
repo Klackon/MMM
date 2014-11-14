@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
 	PlayerManager playerScript;
 	GameObject[] enemy;
 	EnemyManager enemyScript;
+	int[] location;
+	public GameObject gameCam;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +24,9 @@ public class GameManager : MonoBehaviour {
 		float x = 5;
 		float y = -5;
 		float z = -10;
+		location = new int[2];
+		location[0] = 0;
+		location[1] = 0;
 
 		board = new GameTile[boardSize, boardSize];
 		//coordinates = new GameObject[boardSize, boardSize];
@@ -136,10 +141,12 @@ public class GameManager : MonoBehaviour {
 			Debug.Log ("ERROR: PLAYER NOT FOUND");
 			switchToGameFSM();
 		}
+		/*
 		if(enemy == null){
 			Debug.Log("ERROR: NO ENEMIES FOUND");
 			switchToGameFSM();
 		}
+		*/
 	}
 	
 	void updatePLAYERTURN(){
@@ -147,6 +154,31 @@ public class GameManager : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
 		
 		//LOGIC FOR GAMEPPLAY HERE
+		if(Input.GetKeyDown(KeyCode.S)){
+			location[0]++;
+			Debug.Log ("Down");
+		}
+		if(Input.GetKeyDown(KeyCode.A)){
+			if(location[1]!=0) location[1]--;
+			Debug.Log ("Left");
+		}
+		if(Input.GetKeyDown(KeyCode.D)){
+			location[1]++;
+			Debug.Log ("Right");
+		}
+		if(Input.GetKeyDown(KeyCode.W)){
+			if(location[0]!=0) location[0]--;
+			Debug.Log ("Up");
+		}
+		board[location[0],location[1]].moveToTile(player);
+
+		Vector3 pos;
+		pos = gameCam.transform.position;
+		pos.x = board[location[0],location[1]].position.x;
+		pos.y = board[location[0],location[1]].position.y;
+		gameCam.transform.position = pos;
+
+
 
 		//board test
 		/*
