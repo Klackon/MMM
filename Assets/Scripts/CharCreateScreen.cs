@@ -20,7 +20,7 @@ public class CharCreateScreen : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Screen.SetResolution(600, 500, true);
-		string texturePath = "wizards/WZ01";
+		string texturePath = "wizards/WZ1";
 		WizardPic = (Texture)Resources.Load(texturePath, typeof(Texture)); 
 
 	}
