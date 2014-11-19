@@ -26,7 +26,8 @@ public class GameTile{
 	public float production;
 	public float maxPopulation;
 	public GameObject square;
-
+	public string Arcanus = "Texture/terrain/arcanus/";
+	public string Myrror = "Texture/terrain/myrror";
 	public GameTile(){
 		//position = Vector2.zero;
 		//position = new Vector2(5,-5);
@@ -173,7 +174,8 @@ public class GameTile{
 			//manaProduction = 1;
 			maxPopulation = 1;
 			//terrain = TerrainType.Desert;
-			square.renderer.material.color = Color.yellow;
+			Texture desert = (Texture)Resources.Load(Arcanus+"desert/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = desert;
 			// set sprite for renderer (or in game manager)
 			break;
 		case TerrainType.Forest:
@@ -185,7 +187,8 @@ public class GameTile{
 			production = 0.05f;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Forest;
-			square.renderer.material.color = Color.gray;
+			Texture forest = (Texture)Resources.Load(Arcanus+"hills/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = forest;
 			break;
 		case TerrainType.Grasslands:
 			movementVal = 1;
@@ -196,7 +199,8 @@ public class GameTile{
 			production = 0;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Grasslands;
-			square.renderer.material.color = Color.green;
+			Texture Grasslands = (Texture)Resources.Load(Arcanus+"natureNode/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = Grasslands;
 			break;
 		case TerrainType.Hills:
 			movementVal = 2;
@@ -207,7 +211,8 @@ public class GameTile{
 			production = 0.05f;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Hills;
-			square.renderer.material.color = Color.magenta;
+			Texture hills = (Texture)Resources.Load(Myrror+"hills/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = hills;
 			break;
 		case TerrainType.Mountain:
 			movementVal = 3;
@@ -218,7 +223,8 @@ public class GameTile{
 			production = 0.1f;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Mountain;
-			square.renderer.material.color = Color.red;
+			Texture mountain = (Texture)Resources.Load(Arcanus+"mountain/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = mountain;
 			break;
 		case  TerrainType.Ocean:
 			movementVal = 1;
@@ -229,7 +235,8 @@ public class GameTile{
 			production = 0;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Ocean;
-			square.renderer.material.color = Color.blue;
+			Texture ocean = (Texture)Resources.Load(Arcanus+"ocean/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = ocean;
 			break;
 		case TerrainType.River:
 			movementVal = 2;
@@ -240,7 +247,8 @@ public class GameTile{
 			production = 0;
 			//maxPopulation = 1;
 			//terrain = TerrainType.River;
-			square.renderer.material.color = Color.cyan;
+			Texture river = (Texture)Resources.Load(Arcanus+"river/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = river;
 			break;
 		case TerrainType.Shores:
 			movementVal = 1;
@@ -251,7 +259,8 @@ public class GameTile{
 			production = 0;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Shores;
-			square.renderer.material.color = Color.clear;
+			Texture shore = (Texture)Resources.Load(Arcanus+"shore/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = shore;
 			break;
 		case TerrainType.Swamp:
 			movementVal = 3;
@@ -262,7 +271,8 @@ public class GameTile{
 			production = 0;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Swamp;
-			square.renderer.material.color = Color.black;
+			Texture swamp = (Texture)Resources.Load(Arcanus+"swamp/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = swamp;
 			break;
 		case TerrainType.Tundra:
 			movementVal = 2;
@@ -273,7 +283,8 @@ public class GameTile{
 			production = 0;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Tundra;
-			square.renderer.material.color = Color.white;
+			Texture tundra = (Texture)Resources.Load(Arcanus+"tundra/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = tundra;
 			break;
 		}
 	}
