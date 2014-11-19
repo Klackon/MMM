@@ -27,7 +27,7 @@ public class GameTile{
 	public float maxPopulation;
 	public GameObject square;
 	public string Arcanus = "Texture/terrain/arcanus/";
-	public string Myrror = "Texture/terrain/myrror";
+	public string Myrror = "Texture/terrain/myrror/";
 	public GameTile(){
 		//position = Vector2.zero;
 		//position = new Vector2(5,-5);
@@ -199,8 +199,8 @@ public class GameTile{
 			production = 0;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Grasslands;
-			Texture Grasslands = (Texture)Resources.Load(Arcanus+"natureNode/1", typeof(Texture)); 
-			square.renderer.material.mainTexture = Grasslands;
+			Texture grasslands = (Texture)Resources.Load(Arcanus+"grasslands/1", typeof(Texture)); 
+			square.renderer.material.mainTexture = grasslands;
 			break;
 		case TerrainType.Hills:
 			movementVal = 2;
@@ -223,7 +223,7 @@ public class GameTile{
 			production = 0.1f;
 			//maxPopulation = 1;
 			//terrain = TerrainType.Mountain;
-			Texture mountain = (Texture)Resources.Load(Arcanus+"mountain/1", typeof(Texture)); 
+			Texture mountain = (Texture)Resources.Load(Arcanus+"mountains/1", typeof(Texture)); 
 			square.renderer.material.mainTexture = mountain;
 			break;
 		case  TerrainType.Ocean:
