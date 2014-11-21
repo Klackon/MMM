@@ -1,3 +1,4 @@
+
 public class Hunter : UnitsClass{
 
 	private int x;
@@ -7,7 +8,6 @@ public class Hunter : UnitsClass{
 	private int gold;
 	private int mana; // can we gather mana
 	private int food;
-
 	// should hunter has its own constructor?
 	
 	public Hunter(int x, int y, int health){
@@ -15,7 +15,7 @@ public class Hunter : UnitsClass{
 		this.y = y;
 		this.health = health;
 	}
-
+	
 
 	// additional methods for hunters
 	public void gatherFood(int amountOfFood){
