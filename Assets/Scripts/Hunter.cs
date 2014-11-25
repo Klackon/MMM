@@ -10,11 +10,12 @@ public class Hunter : UnitsClass{
 	private int food;
 	// should hunter has its own constructor?
 	
-	public Hunter(int x, int y, int health){
-		this.x = x;
-		this.y = y;
-		this.health = health;
+	public Hunter(int x, int y, int health): base(x, y, health){
+		gold = 0;
+		mana = 0;
+		food = 0;
 	}
+	
 	
 
 	// additional methods for hunters
