@@ -120,6 +120,7 @@ public class Player {
 
 	// for saving and loading, the order is fixed
 	public void save(){
+		Debug.Log ("saved!");
 		StreamWriter writetext = new StreamWriter(name + ".txt");
 		// writetext.WriteLine(name); don't need this
 		// when loading player, the name will be available
