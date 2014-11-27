@@ -11,7 +11,7 @@ public class GameTile{
 	public StructureType structure; 
 	public bool hasStructure;
 	public bool hasSpecial;
-	public bool hasArmy;
+	public bool hasUnit;
 	public bool hasMonster;
 	public bool occupied;
 	public bool onScreen;
@@ -26,8 +26,14 @@ public class GameTile{
 	public float production;
 	public float maxPopulation;
 	public GameObject square;
+	public GameTile[,] board;
+	//public int[,] index;
+	public Location index;
+	public GameTile linkedTiles;
+
 	public string Arcanus = "Texture/terrain/arcanus/";
 	public string Myrror = "Texture/terrain/myrror/";
+
 	public GameTile(){
 		//position = Vector2.zero;
 		//position = new Vector2(5,-5);
@@ -83,7 +89,7 @@ public class GameTile{
 		structure = StructureType.None;
 		hasSpecial = false;
 		hasStructure = false;
-		hasArmy = false;
+		hasUnit = false;
 		hasMonster = false;
 		occupied = false;
 		onScreen = false;
@@ -106,11 +112,12 @@ public class GameTile{
 		square = createTile();
 		terrain = this.randomizeTerrain();
 		this.setTerrain(terrain);
-		altTerrain = SpecialTerrain.None;
+		altTerrain = this.randomizeAltTerrain();
+		//altTerrain = SpecialTerrain.None;
 		structure = StructureType.None;
 		hasSpecial = false;
 		hasStructure = false;
-		hasArmy = false;
+		hasUnit = false;
 		hasMonster = false;
 		occupied = false;
 		onScreen = false;
@@ -162,6 +169,42 @@ public class GameTile{
 		return terrain;
 	}
 
+	public SpecialTerrain randomizeAltTerrain(){
+		switch(Random.Range(0,10)){
+		case 0: 
+			altTerrain = SpecialTerrain.ChaosNodes;
+			break;
+		case 1: 
+			altTerrain = SpecialTerrain.Crystal;
+			break;
+		case 2: 
+			altTerrain = SpecialTerrain.NatureNodes;
+			break;
+		case 3:
+			altTerrain = SpecialTerrain.None;
+			break;
+		case 4:
+			altTerrain = SpecialTerrain.Ore;
+			break;
+		case 5:
+			altTerrain = SpecialTerrain.Ruins;
+			break;
+		case 6:
+			altTerrain = SpecialTerrain.SorceryNodes;
+			break;
+		case 7:
+			altTerrain = SpecialTerrain.Temples;
+			break;
+		case 8:
+			altTerrain = SpecialTerrain.TowerOfWizadry;
+			break;
+		case 9:
+			altTerrain = SpecialTerrain.UndergroundLair;
+			break;
+		}
+		return altTerrain;
+	}
+
 	public void setTerrain(TerrainType val){
 		//Debug.Log("setting terrain");
 		switch(val){
@@ -170,6 +213,7 @@ public class GameTile{
 			//buildVal = 1;
 			foodProduction = 0;
 			goldProduction = 0;
+
 			production = 0.1f;
 			//manaProduction = 1;
 			maxPopulation = 1;
@@ -315,9 +359,49 @@ public class GameTile{
 		}
 	}
 
+	public void setBoard(GameTile[,] bo){
+		board = bo;
+	}
+
+	public void setLocation(int i, int j){
+		index = new Location(i, j);
+	}
+	public Location getLocation(){
+		return index;
+	}
+	public Vector3 getPosition(){
+		return position;
+	}
+
+	public void createStructure(){
+
+	}
+
+	public void setRevealed(bool val){
+		revealed = val;
+		// DO some sprite shit to change whether or not fog appears
+	}
+
 	public Vector3 moveToTile(GameObject go){
 		Debug.Log("attempting move");
 		go.transform.position = this.position;
 		return go.transform.position;
 	}
+
+	/*
+	public Vector3 moveToTile(GameObject go){
+		Debug.Log("attempting move");
+		go.transform.position = this.position;
+		return go.transform.position;
+	}
+	*/
+	/*
+	public Vector3 moveToTile(GameObject go, int[] location){
+		Debug.Log("attempting move");
+		GameTile tile = board[location[0],location[1]];
+		//go.transform.position = this.position;
+		//return go.transform.position;
+		return tile.moveToTile(go);
+	}
+	*/
 }

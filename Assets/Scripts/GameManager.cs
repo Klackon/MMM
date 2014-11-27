@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	public Hunter hunter = new Hunter(10,10,100);
 	int[] location;
 	public GameObject gameCam;
+	public GameBoard boardScript;
 	// Use this for initialization
 	void Start () {
 		n = 0;
@@ -29,22 +30,19 @@ public class GameManager : MonoBehaviour {
 		location[0] = 0;
 		location[1] = 0;
 
+		//boardScript = gameCam.GetComponent<GameBoard>();
+		//board = boardScript.getBoard();
+
+		/*
 		board = new GameTile[boardSize, boardSize];
 		//coordinates = new GameObject[boardSize, boardSize];
-		/*
-		for(int i = 0; i < boardSize; i++){
-			for(int j = 0; j < boardSize; j++){
-				coordinates[i, j] = new GameObject();
-				//coordinates[i, j].AddComponent("Transform");
-				coordinates[i, j].transform.position = new Vector2(i*spaceOffset,j*spaceOffset);
-			}
-		}
-		*/
+
 		for(int i=0; i<boardSize; i++){
 			for(int j=0; j<boardSize; j++){
 				//Vector2 pos = new Vector2(x, y);
 				Vector3 pos = new Vector3(x, y, z);
 				board[i, j] = new GameTile(pos);
+				board[i, j].setBoard(board);
 				x+=10;
 				if(j==boardSize-1){
 					x = 5;
@@ -52,6 +50,7 @@ public class GameManager : MonoBehaviour {
 			}
 			y-=10;
 		}
+		*/
 
 		/*
 		foreach(GameTile gt in board){
@@ -63,6 +62,11 @@ public class GameManager : MonoBehaviour {
 
 		switchToGameFSM();
 	}
+
+	public void setBoard(GameTile[,] arr){
+		board = arr;
+	}
+
 	void OnGUI() {
 		hunt = (Texture)Resources.Load("unit/hunter/1", typeof(Texture)); 
 		GUI.DrawTexture(new Rect(200,0, 50, 50), hunt, ScaleMode.StretchToFill, true, 10.0F);
@@ -141,10 +145,12 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void enterPLAYERTURN(){
+		/*
 		if(player == null){ 
 			Debug.Log ("ERROR: PLAYER NOT FOUND");
 			switchToGameFSM();
 		}
+		*/
 		/*
 		if(enemy == null){
 			Debug.Log("ERROR: NO ENEMIES FOUND");
@@ -174,11 +180,11 @@ public class GameManager : MonoBehaviour {
 			if(location[0]!=0) location[0]--;
 			Debug.Log ("Up");
 		}
-		board[location[0],location[1]].moveToTile(player);
+		//board[location[0],location[1]].moveToTile(player);
 
 		Vector3 pos;
 		pos = gameCam.transform.position;
-		pos.x = board[location[0],location[1]].position.x;
+		pos.x = board[location[0],location[1]].getPosition().x;
 		pos.y = board[location[0],location[1]].position.y;
 		gameCam.transform.position = pos;
 
