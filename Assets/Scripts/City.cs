@@ -13,19 +13,23 @@ public class City
 {
 	private string name, race;
 	private int population;
+	private int xLocation, yLocation;
 	private int workers, farmers;
 	private double taxRate;
-	private int prodPoints;
+	private int prodPoints, food;
 	private string currentBuild;
 	private int buildTime;
 
-	public City (string n, string r, int pop, double tax)
+	public City (string n, string r, int x, int y, int pop, double tax)
 	{
 		name = n;
 		race = r;
+		xLocation = x;
+		yLocation = y;
 		population = pop;
 		farmers = population / 2;
 		workers = population - farmers;
+		food = farmers * 2;
 
 		prodPoints = farmers + workers*2;
 		if (race == "dwarves" || race == "klackons")
@@ -49,6 +53,12 @@ public class City
 			farmers = farmers - shiftAmount;
 			workers = workers + shiftAmount;
 		}
+	}
+
+	public void setLocation(int x, int y)
+	{
+		xLocation = x;
+		yLocation = y;
 	}
 
 	public void setPopulation(int pop)
@@ -82,6 +92,16 @@ public class City
 	public string getRace()
 	{
 		return race;
+	}
+
+	public int getX()
+	{
+		return xLocation;
+	}
+
+	public int getY()
+	{
+		return yLocation;
 	}
 
 	public int getPopulation()

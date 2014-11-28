@@ -6,8 +6,15 @@ public class Scout : UnitsClass{
 
 	public Scout(int x, int y, int health): base(x, y, health){}
 
-	public void buidCamp(){
+	public void buildOutpost()
+	{
+		Outpost newPost = new Outpost ("New Outpost", "Klackon", x, y);
+	}
 
+	public void moveScout(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
 	}
 
 

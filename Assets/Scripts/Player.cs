@@ -103,12 +103,6 @@ public class Player {
 	}
 
 
-
-	// need to save all fields of a player
-	// if we decide to implement saving  the game
-	// as one of our features
-
-
 	// 
 	// other methods
 
