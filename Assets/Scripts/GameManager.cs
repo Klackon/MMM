@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
 
 	void OnGUI() {
 		hunt = (Texture)Resources.Load("unit/hunter/1", typeof(Texture)); 
-		GUI.DrawTexture(new Rect(200,0, 50, 50), hunt, ScaleMode.StretchToFill, true, 10.0F);
+		//GUI.DrawTexture(new Rect(200,0, 50, 50), hunt, ScaleMode.StretchToFill, true, 10.0F);
 		}
 	// Update is called once per frame
 	void Update () {
