@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f90f619055c4948768c93b800368b26c
+guid: ae98e73ef3668114f8766e67f9698fd2
 TextureImporter:
   fileIDToRecycleName:
     21300000: d2-move-frame3
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

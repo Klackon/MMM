@@ -54,14 +54,13 @@ public class GameBoard : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		hunt = (Texture)Resources.Load ("unit/hunter/1", typeof(Texture));
-		scout = (Texture)Resources.Load ("unit/scout/1", typeof(Texture));
-		var guiPosition = Camera.main.WorldToScreenPoint(transform.position); 
+
+		/*var guiPosition = Camera.main.WorldToScreenPoint(transform.position); 
 		guiPosition.y = Screen.height - guiPosition.y; 
 
 
 		rect = new Rect(board[2,0].index.getTile().getPosition().x*10, board[2,0].index.getTile().getPosition().y*-10, hunt.width, hunt.height); 
-		GUI.DrawTexture(rect, hunt);
+		GUI.DrawTexture(rect, hunt);*/
 		//rect = new Rect(guiPosition.x + hunt.width - 200, guiPosition.y + hunt.height - 100, hunt.width, hunt.height); 
 		//GUI.DrawTexture(rect, scout);
 		}

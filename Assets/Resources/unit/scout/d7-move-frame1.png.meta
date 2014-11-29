@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a0dc8db901024ed7a32c498fc1ad19e
+guid: eb6036b09b1056e47a4d9c443104f495
 TextureImporter:
   fileIDToRecycleName:
     21300000: d7-move-frame1
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

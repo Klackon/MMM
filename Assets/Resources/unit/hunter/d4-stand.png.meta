@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 246d4fb7d7d1e9e44a000472215c0d11
+guid: 346e6618c756841988df6c9ee8156ecd
 TextureImporter:
   fileIDToRecycleName:
     21300000: d4-stand
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

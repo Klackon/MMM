@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 079201d7fe5714aeeacd4c1f1eb14a65
+guid: dec843930b2a4aa4e9f73705ccc02328
 TextureImporter:
   fileIDToRecycleName:
     21300000: d6-attack
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

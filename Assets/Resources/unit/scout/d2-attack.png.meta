@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7db51d0ef39ef420dad5cfb396506303
+guid: 2051d8e860095c6449fc2c9470942adb
 TextureImporter:
   fileIDToRecycleName:
     21300000: d2-attack
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
