@@ -17,11 +17,8 @@ public class GameManager : MonoBehaviour {
 	EnemyManager enemyScript;
 	int[] location;
 	public GameObject gameCam;
-<<<<<<< Updated upstream
 	public GameBoard boardScript;
-=======
 
->>>>>>> Stashed changes
 	// Use this for initialization
 	void Start () {
 		n = 0;
@@ -64,19 +61,16 @@ public class GameManager : MonoBehaviour {
 
 		switchToGameFSM();
 	}
-<<<<<<< Updated upstream
 
 	public void setBoard(GameTile[,] arr){
 		board = arr;
 	}
 
 	void OnGUI() {
-		hunt = (Texture)Resources.Load("unit/hunter/1", typeof(Texture)); 
+		//hunt = (Texture)Resources.Load("unit/hunter/1", typeof(Texture)); 
 		//GUI.DrawTexture(new Rect(200,0, 50, 50), hunt, ScaleMode.StretchToFill, true, 10.0F);
 		}
-=======
-	
->>>>>>> Stashed changes
+
 	// Update is called once per frame
 	void Update () {
 	

@@ -34,8 +34,6 @@ public class CharCreateScreen : MonoBehaviour {
 		addOnGUI (specialAbility, 140);
 		addOnGUI (banner, 160);
 		addOnGUI (homeCityName, 180);*/
-		GameFeatures features = new GameFeatures ();
-		features.createFog();
 		for (int i = 0; i < stringToEdit.Length; ++i) {
 						stringToEdit [i] = GUI.TextField (new Rect (400, 30+ (i * 30), 120, 30), stringToEdit [i], 25);
 						GUI.Label(new Rect(300, 30+(i*30), 100, 30), label[i]);
