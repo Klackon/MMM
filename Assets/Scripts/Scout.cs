@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Scout : UnitsClass{
 
 	private int x;
@@ -9,6 +11,8 @@ public class Scout : UnitsClass{
 	public void buildOutpost()
 	{
 		Outpost newPost = new Outpost ("New Outpost", "Klackon", x, y);
+		GameObject outpost = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		outpost.transform.localScale = new Vector3 (10, 10, 1);
 	}
 
 	public void moveScout(int x, int y)
