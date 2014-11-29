@@ -13,3 +13,4 @@ Note: the functionality of character creation is there, where you can save the i
 To save a player's info, please open "CharCreation.unity" and play. Once you enter all info (these are place holders right now), press F1 to save the info to the same location as this README is.
 
 A Scout can now create an outpost on any square
+Add scout and hunter texture, so they exist on game board
