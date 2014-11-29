@@ -8,6 +8,10 @@ public class GameBoard : MonoBehaviour {
 	public int boardSize = 20;
 	public UnitsClass[] units;
 	public Monster[] monsters;
+	public Rect rect;
+	Texture hunt;
+	Texture scout;
+	public Hunter hunter;
 
 	// Use this for initialization
 	void Start () {
@@ -39,8 +43,9 @@ public class GameBoard : MonoBehaviour {
 			}
 			y-=10;
 		}
-
 		manager.setBoard(board);
+		print (board[2,0].index.getTile().getPosition().x);
+		print (board[2,0].index.getTile().getPosition().y);
 	}
 	
 	// Update is called once per frame
@@ -48,6 +53,18 @@ public class GameBoard : MonoBehaviour {
 	
 	}
 
+	void OnGUI(){
+		hunt = (Texture)Resources.Load ("unit/hunter/1", typeof(Texture));
+		scout = (Texture)Resources.Load ("unit/scout/1", typeof(Texture));
+		var guiPosition = Camera.main.WorldToScreenPoint(transform.position); 
+		guiPosition.y = Screen.height - guiPosition.y; 
+
+
+		rect = new Rect(board[2,0].index.getTile().getPosition().x*10, board[2,0].index.getTile().getPosition().y*-10, hunt.width, hunt.height); 
+		GUI.DrawTexture(rect, hunt);
+		//rect = new Rect(guiPosition.x + hunt.width - 200, guiPosition.y + hunt.height - 100, hunt.width, hunt.height); 
+		//GUI.DrawTexture(rect, scout);
+		}
 	/*
 	public Vector3 moveToTile(GameObject go){
 		Debug.Log("attempting move");
