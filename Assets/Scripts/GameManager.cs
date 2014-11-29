@@ -11,15 +11,17 @@ public class GameManager : MonoBehaviour {
 	public int boardSize = 20;
 	int spaceOffset = 10;
 	int n;
-	Texture hunt;
 	GameObject player;
 	PlayerManager playerScript;
 	GameObject[] enemy;
 	EnemyManager enemyScript;
-	public Hunter hunter = new Hunter(10,10,100);
 	int[] location;
 	public GameObject gameCam;
+<<<<<<< Updated upstream
 	public GameBoard boardScript;
+=======
+
+>>>>>>> Stashed changes
 	// Use this for initialization
 	void Start () {
 		n = 0;
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour {
 
 		switchToGameFSM();
 	}
+<<<<<<< Updated upstream
 
 	public void setBoard(GameTile[,] arr){
 		board = arr;
@@ -71,6 +74,9 @@ public class GameManager : MonoBehaviour {
 		hunt = (Texture)Resources.Load("unit/hunter/1", typeof(Texture)); 
 		//GUI.DrawTexture(new Rect(200,0, 50, 50), hunt, ScaleMode.StretchToFill, true, 10.0F);
 		}
+=======
+	
+>>>>>>> Stashed changes
 	// Update is called once per frame
 	void Update () {
 	
