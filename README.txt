@@ -14,4 +14,4 @@ To save a player's info, please open "CharCreation.unity" and play. Once you ent
 
 A Scout can now create an outpost on any square
 Add scout and hunter texture, so they exist on game board
-We later on for the last sprint spent our time heavily on the back end, and not so much on the GUI because most functionality requires back end, such as the City class, the data structure of the board, what a Scout can see given its position...etc. Unfortunately we were unable to complete GUI design for those.
+We later on for the last sprint spent our time heavily on the back end, and not so much on the GUI because most functionality requires back end, such as the City class, the data structure of the board, what a Scout can see given its position...etc. Unfortunately we were unable to complete GUI design for those. As our purpose is to build the basic of the game so other team might be able to build on what we have this semester, we shall let them take care of the GUI part.
