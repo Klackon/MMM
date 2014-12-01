@@ -18,6 +18,7 @@ public class GameFeatures : MonoBehaviour {
 		playerInfoPanel = new Rect(601, 300, 300, 200);
 		bgImage = (Texture) Resources.Load("Image/unitDetails", typeof(Texture));
 		plBgImage = (Texture)Resources.Load("Image/mirror", typeof(Texture));
+		print ("this is a game feature tool bar");
 	}
 	
 	// Update is called once per frame
